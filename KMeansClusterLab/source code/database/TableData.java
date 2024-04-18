@@ -10,21 +10,23 @@ import java.util.Set;
 
 import database.Table_Schema.Column;
 
-
+// La classe 'TableData' fornisce metodi per interagire con i dati delle tabelle nel database.
 public class TableData {
-    private DbAccess db;
+    private final DbAccess db; // Riferimento a DbAccess per l'accesso al database.
 
+    // Costruttore che inizializza la classe con un'istanza di DbAccess.
     public TableData(DbAccess db) {
         this.db = db;
     }
 
+    // Metodo che restituisce una lista di transazioni distinte dalla tabella specificata.
     public List<Example> getDistinctTransazioni(String table) throws SQLException, EmptySetException {
         List<Example> distinctTransazioni = new ArrayList<>();
         String query = "SELECT DISTINCT * FROM " + table;
         try (Statement stmt = db.getConnection().createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
             if (!rs.next()) {
-                throw new EmptySetException ("La tabella è vuota");
+                throw new EmptySetException("La tabella è vuota");
             } else {
                 do {
                     Example example = new Example();
@@ -37,6 +39,7 @@ public class TableData {
         return distinctTransazioni;
     }
 
+    // Metodo che restituisce un insieme di valori distinti per una colonna specificata in una tabella.
     public Set<Object> getDistinctColumnValues(String table, Column column) throws SQLException {
         Set<Object> distinctValues = new HashSet<>();
         String query = "SELECT DISTINCT " + column.getColumnName() + " FROM " + table;
@@ -50,6 +53,7 @@ public class TableData {
         return distinctValues;
     }
 
+    // Metodo che calcola e restituisce un valore aggregato (minimo o massimo) per una colonna specificata in una tabella.
     public Object getAggregateColumnValue(String table, Column column, QUERY_TYPE aggregate) throws SQLException, NoValueException {
         Object aggregateValue = null;
         String aggregateFunction = "";
@@ -83,10 +87,9 @@ public class TableData {
         return aggregateValue;
     }
 
+    // Enumerazione interna che definisce i tipi di query aggregata supportati.
     public enum QUERY_TYPE {
         MIN,
         MAX
     }
-
-
 }
