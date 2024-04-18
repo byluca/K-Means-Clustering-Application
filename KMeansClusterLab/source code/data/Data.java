@@ -7,12 +7,12 @@ public class Data {
 
     List <Example> data;
     int numberOfExamples;
-    List<Attribute> attributeSet =new LinkedList<Attribute>(); //nomi degli attributi del dataset con il rispettivo indice
+    List<Attribute> attributeSet = new LinkedList<>(); // Nomi degli attributi del dataset con il rispettivo indice
 
 
     public Data(){
 
-        TreeSet<Example> tempData = new TreeSet<Example>();
+        TreeSet<Example> tempData = new TreeSet<>();
         Example ex0=new Example();
         Example ex1=new Example();
         Example ex2=new Example();
@@ -47,20 +47,23 @@ public class Data {
         //SECONDI ATTRIBUTI
 
         // VERSIONE OBSOLETA -> ex0.add(new Double (37,5));
-        ex0.add(Double.valueOf(37.5));
-        ex1.add(Double.valueOf(38.7));
-        ex2.add(Double.valueOf(37.5));
-        ex3.add(Double.valueOf(20.5));
-        ex4.add(Double.valueOf(20.7));
-        ex5.add(Double.valueOf(21.2));
-        ex6.add(Double.valueOf(20.5));
-        ex7.add(Double.valueOf(21.2));
-        ex8.add(Double.valueOf(21.2));
-        ex9.add(Double.valueOf(19.8));
-        ex10.add(Double.valueOf(3.5));
-        ex11.add(Double.valueOf(3.6));
-        ex12.add(Double.valueOf(3.5));
-        ex13.add(Double.valueOf(3.2));
+        // VERSIONE ATTUALE CON BOXING ESPRESSO -> ex0.add(Double.valueOf(37.5));
+        // VERSIONE MIGLIORATA SENZA BOXING ESPRESSO
+        ex0.add(37.5); // L'autoboxing di Java converte automaticamente 37.5 in un Double.
+        ex1.add(38.7);
+        ex2.add(37.5);
+        ex3.add(20.5);
+        ex4.add(20.7);
+        ex5.add(21.2);
+        ex6.add(20.5);
+        ex7.add(21.2);
+        ex8.add(21.2);
+        ex9.add(19.8);
+        ex10.add(3.5);
+        ex11.add(3.6);
+        ex12.add(3.5);
+        ex13.add(3.2);
+
 
         //TERZI ATTRIBUTI
 
@@ -128,7 +131,7 @@ public class Data {
         tempData.add(ex12);
         tempData.add(ex13);
 
-        data=new ArrayList<Example>(tempData);
+        data=new ArrayList<>(tempData);
     //    System.out.println(data.size());
         numberOfExamples = data.size();
 
@@ -196,10 +199,12 @@ public class Data {
     {
         Tuple tuple = new Tuple(attributeSet.size());
         for (Attribute at : attributeSet) {
-            if(at instanceof DiscreteAttribute)
+            if (at instanceof DiscreteAttribute) {
                 tuple.add(new DiscreteItem((DiscreteAttribute) at, (String) data.get(index).get(at.getIndex())), at.getIndex());
-            else
-                tuple.add(new ContinuousItem((ContinuousAttribute) at, (Double) data.get(index).get(at.getIndex())), at.getIndex());
+            } else {
+                // Casting to ContinuousAttribute is removed because it's redundant
+                tuple.add(new ContinuousItem(at, (Double) data.get(index).get(at.getIndex())), at.getIndex());
+            }
         }
         return tuple;
     }

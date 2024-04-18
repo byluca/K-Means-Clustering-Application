@@ -1,36 +1,38 @@
 package data;
 
-
-
 import java.util.Arrays;
 import java.util.Set;
 import java.util.Iterator;
 import java.util.TreeSet;
 
+// La classe 'DiscreteAttribute' estende 'Attribute' e implementa 'Iterable<String>' per gestire attributi che possono assumere un set discreto di valori.
 public class DiscreteAttribute extends Attribute implements Iterable<String>{
 
+    // TreeSet 'values' contiene un set ordinato dei valori che l'attributo può assumere.
     private TreeSet<String> values;
 
-    public DiscreteAttribute(String name, int index, String values[]) {
-        super(name, index);
-        this.values = new TreeSet<String>();
-        this.values.addAll(Arrays.asList(values));//TODO: cambia da quello di fonty
+    // Costruttore di 'DiscreteAttribute' inizializza l'attributo con un nome, un indice e un array di valori possibili.
+    public DiscreteAttribute(String name, int index, String[] values) {
+        super(name, index); // Chiama il costruttore della superclasse 'Attribute'.
+        this.values = new TreeSet<String>(); // Inizializza il TreeSet.
+        this.values.addAll(Arrays.asList(values)); // Aggiunge tutti i valori dall'array al TreeSet.
     }
 
-        public Iterator<String> iterator () {
-            return this.values.iterator();
-        }
+    // Implementa il metodo 'iterator' per permettere iterazioni sul set dei valori.
+    public Iterator<String> iterator() {
+        return this.values.iterator();
+    }
 
-        int frequency (Data data, Set < Integer > idList, String v)
-        {
-            int cont = 0;
-            for (int i : idList) {
-                // se il valore restituito dal metodo "getAttributeValue" dell'oggetto "data", passando come parametro l'i-esimo elemento dell'array "vector" e l'indice corrente dell'istanza di questo oggetto, è uguale alla stringa "v", allora viene incrementato il valore della variabile "count".
-                if (data.getAttributeValue(i, this.getIndex()).equals(v)) {
-                    cont++;
-                }
+    // Metodo 'frequency' calcola la frequenza di un particolare valore 'v' all'interno di un set di ID specificato, utilizzando un dato dataset 'data'.
+    int frequency(Data data, Set<Integer> idList, String v) {
+        int cont = 0; // Contatore per la frequenza del valore.
+        for (int i : idList) {
+            // Verifica se il valore dell'attributo per l'indice 'i' corrisponde a 'v'.
+            if (data.getAttributeValue(i, this.getIndex()).equals(v)) {
+                cont++; // Incrementa il contatore se il valore corrisponde.
             }
-            return cont;
         }
+        return cont; // Ritorna il conteggio totale della frequenza del valore.
+    }
 
 }
