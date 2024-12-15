@@ -1,16 +1,13 @@
 # 🌟 **K-Means Clustering Application** 🌟
 
+<div align="center">
+  <img src="cluster.png" alt="K-Means Clustering Logo" width="300">
+</div>
+
 ---
 
-<div style="display: flex; align-items: center;">
-  <div style="flex: 1;">
-    ## 🚀 **Introduction**
-    🎉 Welcome to the K-Means Clustering Application! This tool provides an intuitive JavaFX-based graphical user interface for performing K-Means clustering on datasets. With this app, you can interactively input, process, and visualize clustering operations like never before! 🎨📊
-  </div>
-  <div style="flex: 1; text-align: right;">
-    <img src="cluster.png" alt="K-Means Clustering Logo" width="200">
-  </div>
-</div>
+## 🚀 **Introduction**
+🎉 Welcome to the K-Means Clustering Application! This tool provides an intuitive JavaFX-based graphical user interface for performing K-Means clustering on datasets. With this app, you can interactively input, process, and visualize clustering operations like never before! 🎨📊
 
 ---
 
