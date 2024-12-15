@@ -1,7 +1,7 @@
 # 🌟 **K-Means Clustering Application** 🌟
 
 <div align="center">
-  <img src="cluster.png" alt="K-Means Clustering Logo" width="300">
+  <img src="cluster.png" alt="K-Means Clustering Logo" width="600" height="600">
 </div>
 
 ---
